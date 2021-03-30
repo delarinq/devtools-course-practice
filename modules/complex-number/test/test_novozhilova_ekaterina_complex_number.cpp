@@ -6,7 +6,6 @@
 
 TEST(Novozhilova_Ekaterina_ComplexNumberTest,
 Created_With_The_Same_Complex_Number_Are_Equal) {
-    
     ComplexNumber z(2.0, -4.5);
 
     ComplexNumber z1(z);
@@ -17,7 +16,6 @@ Created_With_The_Same_Complex_Number_Are_Equal) {
 }
 
 TEST(Novozhilova_Ekaterina_ComplexNumberTest, Equals_Origin) {
-
     ComplexNumber a(-2.3, 0.0);
 
     ComplexNumber b(a);
@@ -29,7 +27,6 @@ TEST(Novozhilova_Ekaterina_ComplexNumberTest, Equals_Origin) {
 
 TEST(Novozhilova_Ekaterina_ComplexNumberTest,
 Res_Are_Not_Equal_Then_Numbers_Arent_Too) {
-
     ComplexNumber a(7.8, 5.0);
     ComplexNumber b(3.0, 5.0);
 
@@ -37,12 +34,12 @@ Res_Are_Not_Equal_Then_Numbers_Arent_Too) {
     int part_equality;
     int full_equality;
 
-    if(a.getRe() != b.getRe()) {
+    if (a.getRe() != b.getRe()) {
         part_equality = 0;
     } else {
         part_equality = 1;
     }
-    if(a != b) {
+    if (a != b) {
         full_equality = 0;
     } else {
         full_equality = 1;
