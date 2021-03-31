@@ -32,8 +32,10 @@ TEST(Novozhilova_Ekaterina_ComplexNumberTest, Equals_Origin) {
     ASSERT_DOUBLE_EQ(a.getIm(), c.getIm());
 }
 
-typedef testing::TestWithParam<std::tuple<double, double, double>> Novozhilova_Ekaterina_ComplexNumberTest_Param;
-TEST_P(Novozhilova_Ekaterina_ComplexNumberTest_Param, Res_Are_Not_Equal_Then_Numbers_Arent_Too) {
+typedef testing::TestWithParam<std::tuple<double, double, double>>
+Novozhilova_Ekaterina_ComplexNumberTest_Param;
+TEST_P(Novozhilova_Ekaterina_ComplexNumberTest_Param,
+Res_Are_Not_Equal_Then_Numbers_Arent_Too) {
     // Arrange
     ComplexNumber a(std::get<0>(GetParam()), std::get<1>(GetParam()));
     ComplexNumber b(a);
