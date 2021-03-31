@@ -2,6 +2,7 @@
 
 #include <gtest/gtest.h>
 
+#include <tuple>
 #include "include/complex_number.h"
 
 TEST(Novozhilova_Ekaterina_ComplexNumberTest,
@@ -31,17 +32,17 @@ TEST(Novozhilova_Ekaterina_ComplexNumberTest, Equals_Origin) {
     ASSERT_DOUBLE_EQ(a.getIm(), c.getIm());
 }
 
-TEST(Novozhilova_Ekaterina_ComplexNumberTest,
-Res_Are_Not_Equal_Then_Numbers_Arent_Too) {
+typedef testing::TestWithParam<std::tuple<double, double, double>> Novozhilova_Ekaterina_ComplexNumberTest_Param;
+TEST_P(Novozhilova_Ekaterina_ComplexNumberTest_Param, Res_Are_Not_Equal_Then_Numbers_Arent_Too) {
     // Arrange
-    ComplexNumber a(7.8, 5.0);
+    ComplexNumber a(std::get<0>(GetParam()), std::get<1>(GetParam()));
     ComplexNumber b(a);
     // 0 is not equal, 1 is equal
     int part_equality;
     int full_equality;
 
     // Act
-    b.setRe(3.4);
+    b.setRe(std::get<2>(GetParam()));
     if (a.getRe() != b.getRe()) {
         part_equality = 0;
     } else {
@@ -56,3 +57,10 @@ Res_Are_Not_Equal_Then_Numbers_Arent_Too) {
     // Assert
     ASSERT_EQ(part_equality, full_equality);
 }
+
+INSTANTIATE_TEST_CASE_P(/**/, Novozhilova_Ekaterina_ComplexNumberTest_Param,
+    testing::Combine(
+    testing::Values(0.0, 3.3, 9.8),
+    testing::Values(-4.0, -7.3, 10.4),
+    testing::Values(4.0, -15.0, -6.6)
+));
