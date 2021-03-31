@@ -61,8 +61,9 @@ Res_Are_Not_Equal_Then_Numbers_Arent_Too) {
 }
 
 INSTANTIATE_TEST_CASE_P(/**/, Novozhilova_Ekaterina_ComplexNumberTest_Param,
-    testing::Combine(
-    testing::Values(0.0, 3.3, 9.8),
-    testing::Values(-4.0, -7.3, 10.4),
-    testing::Values(4.0, -15.0, -6.6)
+    testing::Values(
+    std::make_tuple(0.0, 3.3, 9.8),
+    std::make_tuple(-4.0, -7.3, 10.4),
+    std::make_tuple(4.0, -15.0, -6.6),
+    std::make_tuple(-4.39, -1.22, -8.3)
 ));
