@@ -167,7 +167,8 @@ TEST(Novozhilova_Ekaterina_modified_stack_Test, testEqual) {
     ASSERT_TRUE(equality);
 }
 
-TEST(Novozhilova_Ekaterina_modified_stack_Test, testSizesAfterEquatingAreTheSame) {
+TEST(Novozhilova_Ekaterina_modified_stack_Test,
+testSizesAfterEquatingAreTheSame) {
     ModifiedStack mystack1(16);
     ModifiedStack mystack2(7);
     mystack1 = mystack2;
@@ -178,7 +179,8 @@ TEST(Novozhilova_Ekaterina_modified_stack_Test, testSizesAfterEquatingAreTheSame
     ASSERT_TRUE(equality);
 }
 
-TEST(Novozhilova_Ekaterina_modified_stack_Test, testLastIsTheSameAfterEquating) {
+TEST(Novozhilova_Ekaterina_modified_stack_Test,
+testLastIsTheSameAfterEquating) {
     ModifiedStack mystack1(58);
     ModifiedStack mystack2(63);
     mystack1.push(12);
@@ -195,13 +197,15 @@ TEST(Novozhilova_Ekaterina_modified_stack_Test, testLastIsTheSameAfterEquating) 
     ASSERT_TRUE(equality);
 }
 
-TEST(Novozhilova_Ekaterina_modified_stack_Test, testIfSizesAreDiffThenNotEqual) {
+TEST(Novozhilova_Ekaterina_modified_stack_Test,
+testIfSizesAreDiffThenNotEqual) {
     ModifiedStack mystack1(16);
     ModifiedStack mystack2(6);
     ASSERT_FALSE(mystack1 == mystack2);
 }
 
-TEST(Novozhilova_Ekaterina_modified_stack_Test, testIfSizesAreDiffThenNotEqual_2) {
+TEST(Novozhilova_Ekaterina_modified_stack_Test,
+testIfSizesAreDiffThenNotEqual_2) {
     ModifiedStack mystack1(13);
     ModifiedStack mystack2(3);
     ASSERT_TRUE(mystack1 != mystack2);
