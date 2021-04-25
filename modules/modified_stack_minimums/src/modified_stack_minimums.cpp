@@ -39,7 +39,7 @@ void ModifiedStack::push(double el) {
         std::pair<double, double> elem(el, el);
         mem[0] = elem;
         last++;
-    } else if (last < st_size) {
+    } else if (last < st_size - 1) {
         double last_min = mem[last].second;
         if (last_min > el) {
             std::pair<double, double> elem(el, el);
