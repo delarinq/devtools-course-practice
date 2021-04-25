@@ -2,6 +2,7 @@
 
 #include "include/modified_stack_minimums.h"
 #include <vector>
+#include <utility>
 
 ModifiedStack::ModifiedStack(int _size) {
         st_size = _size;
@@ -67,7 +68,7 @@ bool ModifiedStack::isEmpty() {
         return true;
     } else {
         return false;
-    } 
+    }
 }
 
 void ModifiedStack::pop() {
