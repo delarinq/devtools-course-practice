@@ -144,3 +144,65 @@ TEST(Novozhilova_Ekaterina_modified_stack_Test, testGetLast) {
     mystack.push(34);
     ASSERT_EQ(3, mystack.getLast());
 }
+
+TEST(Novozhilova_Ekaterina_modified_stack_Test, testPushInFullStack) {
+    ModifiedStack mystack(4);
+    mystack.push(20);
+    mystack.push(64);
+    mystack.push(23);
+    mystack.push(34);
+    ASSERT_ANY_THROW(mystack.push(56));
+}
+
+TEST(Novozhilova_Ekaterina_modified_stack_Test, testEqual) {
+    ModifiedStack mystack1(4);
+    ModifiedStack mystack2(7);
+    mystack1.push(4);
+    mystack1.push(75);
+    mystack2 = mystack1;
+    bool equality = false;
+    if (mystack2 == mystack1) {
+        equality = true;
+    }
+    ASSERT_TRUE(equality);
+}
+
+TEST(Novozhilova_Ekaterina_modified_stack_Test, testSizesAfterEquatingAreTheSame) {
+    ModifiedStack mystack1(16);
+    ModifiedStack mystack2(7);
+    mystack1 = mystack2;
+    bool equality = false;
+    if (mystack1.getSize() == mystack2.getSize()) {
+        equality = true;
+    }
+    ASSERT_TRUE(equality);
+}
+
+TEST(Novozhilova_Ekaterina_modified_stack_Test, testLastIsTheSameAfterEquating) {
+    ModifiedStack mystack1(58);
+    ModifiedStack mystack2(63);
+    mystack1.push(12);
+    mystack1.push(14);
+    mystack1.push(3);
+    mystack1.push(5);
+    mystack2.push(9);
+    mystack2.push(10);
+    mystack1 = mystack2;
+    bool equality = false;
+    if (mystack1.getLast() == mystack2.getLast()) {
+        equality = true;
+    }
+    ASSERT_TRUE(equality);
+}
+
+TEST(Novozhilova_Ekaterina_modified_stack_Test, testIfSizesAreDiffThenNotEqual) {
+    ModifiedStack mystack1(16);
+    ModifiedStack mystack2(6);
+    ASSERT_FALSE(mystack1 == mystack2);
+}
+
+TEST(Novozhilova_Ekaterina_modified_stack_Test, testIfSizesAreDiffThenNotEqual_2) {
+    ModifiedStack mystack1(13);
+    ModifiedStack mystack2(3);
+    ASSERT_TRUE(mystack1 != mystack2);
+}
