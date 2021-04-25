@@ -7,7 +7,8 @@ ModifiedStack::ModifiedStack(int _size) {
         st_size = _size;
         last = -1;
         mem.resize(st_size);
-    }
+}
+
 ModifiedStack::ModifiedStack(const ModifiedStack &tmp) {
     st_size = tmp.st_size;
     last = tmp.last;
@@ -16,6 +17,7 @@ ModifiedStack::ModifiedStack(const ModifiedStack &tmp) {
         mem[i] = tmp.mem[i];
     }
 }
+
 ModifiedStack& ModifiedStack::operator=(const ModifiedStack &tmp) {
     if (st_size != tmp.st_size) {
         if (st_size != 0) {
@@ -30,6 +32,7 @@ ModifiedStack& ModifiedStack::operator=(const ModifiedStack &tmp) {
     }
     return *this;
 }
+
 void ModifiedStack::push(double el) {
     if (last == -1) {
         std::pair<double, double> elem(el, el);
@@ -45,10 +48,8 @@ void ModifiedStack::push(double el) {
             std::pair<double, double> elem(el, last_min);
             last++;
             mem[last] = elem;
-            
         }
-    }
-    else throw - 1;
+    } else throw - 1;
 }
 
 bool ModifiedStack::isFull() {
@@ -57,12 +58,14 @@ bool ModifiedStack::isFull() {
     }
     else return false;
 }
+
 bool ModifiedStack::isEmpty() {
     if (last == -1) {
         return true;
     }
     else return false;
 }
+
 void ModifiedStack::pop() {
     mem[last] = std::pair<double, double>(0.0, 0.0);
     last--;
