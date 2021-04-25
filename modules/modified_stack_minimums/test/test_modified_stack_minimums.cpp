@@ -86,7 +86,7 @@ TEST(Novozhilova_Ekaterina_modified_stack_Test, testCompareEqualPositive) {
     mystack1.push(3);
     ModifiedStack mystack2(mystack1);
     bool equality = false;
-    if(mystack1 == mystack2) {
+    if (mystack1 == mystack2) {
         equality = true;
     }
     ASSERT_TRUE(equality);
