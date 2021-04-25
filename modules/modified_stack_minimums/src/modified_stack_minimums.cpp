@@ -51,7 +51,7 @@ void ModifiedStack::push(double el) {
             mem[last] = elem;
         }
     } else {
-        throw - 1;
+        throw -1;
     }
 }
 
