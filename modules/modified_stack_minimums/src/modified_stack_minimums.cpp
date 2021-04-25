@@ -49,21 +49,21 @@ void ModifiedStack::push(double el) {
             last++;
             mem[last] = elem;
         }
-    } else throw - 1;
+    } else {
+        throw - 1;
+    }
 }
 
 bool ModifiedStack::isFull() {
     if (last == st_size - 1) {
         return true;
-    }
-    else return false;
+    } else return false;
 }
 
 bool ModifiedStack::isEmpty() {
     if (last == -1) {
         return true;
-    }
-    else return false;
+    } else return false;
 }
 
 void ModifiedStack::pop() {
