@@ -50,8 +50,7 @@ void ModifiedStack::push(double el) {
             last++;
             mem[last] = elem;
         }
-    }
-    if (last == st_size - 1) {
+    } else if (last == st_size - 1) {
         throw -1;
     }
 }
