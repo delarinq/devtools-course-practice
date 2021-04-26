@@ -12,7 +12,7 @@ TEST(Novozhilova_Ekaterina_modified_stack_Test, testgetSize) {
 
 TEST(Novozhilova_Ekaterina_modified_stack_Test, testConstructor) {
     ModifiedStack mystack1(6);
-    
+
     ModifiedStack mystack2(mystack1);
 
     ASSERT_EQ(6, mystack2.getSize());
