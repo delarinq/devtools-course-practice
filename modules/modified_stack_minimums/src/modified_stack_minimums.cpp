@@ -5,7 +5,7 @@
 #include <utility>
 
 ModifiedStack::ModifiedStack(int _size) {
-    if(_size < 0) {
+    if (_size < 0) {
        throw -1;
     } else {
         st_size = _size;
