@@ -210,3 +210,12 @@ testIfSizesAreDiffThenNotEqual_2) {
     ModifiedStack mystack2(3);
     ASSERT_TRUE(mystack1 != mystack2);
 }
+
+TEST(Novozhilova_Ekaterina_modified_stack_Test,
+testSelfAssignmentAndAssignmet) {
+    ModifiedStack mystack1(34);
+    mystack1 = mystack1;
+    ModifiedStack mystack2(5);
+    mystack2 = mystack1;
+    ASSERT_TRUE(mystack1 == mystack2);
+}

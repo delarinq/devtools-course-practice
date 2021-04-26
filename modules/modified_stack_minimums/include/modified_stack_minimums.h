@@ -19,21 +19,21 @@ class ModifiedStack {
     ~ModifiedStack() {}
     void push(double el);
 
-    bool isFull();
+    bool isFull() const;
 
     void pop();
 
-    bool isEmpty();
+    bool isEmpty() const;
 
-    double getTop();
+    double getTop() const;
 
-    double getMin();
-    bool operator==(const ModifiedStack& tmp);
+    double getMin() const;
+    bool operator==(const ModifiedStack& tmp) const;
 
-    bool operator!=(const ModifiedStack& tmp);
+    bool operator!=(const ModifiedStack& tmp) const;
 
-    int getSize();
-    int getLast();
+    int getSize() const;
+    int getLast() const;
 };
 
 #endif  // MODULES_MODIFIED_STACK_MINIMUMS_INCLUDE_MODIFIED_STACK_MINIMUMS_H_
