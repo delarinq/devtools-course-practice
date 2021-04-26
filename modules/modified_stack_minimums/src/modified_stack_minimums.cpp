@@ -5,9 +5,13 @@
 #include <utility>
 
 ModifiedStack::ModifiedStack(int _size) {
+    if(_size < 0) {
+       throw -1;
+    } else {
         st_size = _size;
         last = -1;
         mem.resize(st_size);
+    }
 }
 
 ModifiedStack::ModifiedStack(const ModifiedStack &tmp) {

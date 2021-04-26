@@ -264,3 +264,7 @@ TEST(Novozhilova_Ekaterina_modified_stack_Test, testLoopForPushandGetLast) {
     }
     ASSERT_EQ(4, mystack.getLast());
 }
+
+TEST(Novozhilova_Ekaterina_modified_stack_Test, testIncorrectSize) {
+    ASSERT_ANY_THROW(ModifiedStack mystack(-6));
+}
