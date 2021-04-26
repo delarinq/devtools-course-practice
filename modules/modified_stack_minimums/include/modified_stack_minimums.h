@@ -15,23 +15,20 @@ class ModifiedStack {
  public:
     explicit ModifiedStack(int _size = 0);
     ModifiedStack(const ModifiedStack &tmp);
-    ModifiedStack &operator=(const ModifiedStack &tmp);
     ~ModifiedStack() {}
+
+    ModifiedStack &operator=(const ModifiedStack &tmp);
+    bool operator==(const ModifiedStack& tmp) const;
+    bool operator!=(const ModifiedStack& tmp) const;
+
+    void pop();
     void push(double el);
 
     bool isFull() const;
-
-    void pop();
-
     bool isEmpty() const;
 
     double getTop() const;
-
     double getMin() const;
-    bool operator==(const ModifiedStack& tmp) const;
-
-    bool operator!=(const ModifiedStack& tmp) const;
-
     int getSize() const;
     int getLast() const;
 };

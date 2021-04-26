@@ -219,3 +219,11 @@ testSelfAssignmentAndAssignmet) {
     mystack2 = mystack1;
     ASSERT_TRUE(mystack1 == mystack2);
 }
+
+TEST(Novozhilova_Ekaterina_modified_stack_Test, testLoopForPushandGetLast) {
+    ModifiedStack mystack(5);
+    for (int i = 0; i < 5; i++) {
+        mystack.push(i);
+    }
+    ASSERT_EQ(4, mystack.getLast());
+}
