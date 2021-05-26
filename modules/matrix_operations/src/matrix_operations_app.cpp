@@ -51,7 +51,8 @@ bool MyApplication::validateNumberOfArguments(int argc, const char** argv) {
         // unsigned int or_cols = std::atoi(argv[2]);
         unsigned int first_arg_num = or_rows * or_cols + 3;
         unsigned int supp_argc = 0;
-        if (argc < first_arg_num) {
+        unsigned int argc_uns = static_cast<unsigned int>(argc);
+        if (argc_uns < first_arg_num) {
             help(argv[0], "ERROR: Invalid input.\n\n");
             return false;
         } else if (strcmp(argv[first_arg_num], "matrix") == 1) {
