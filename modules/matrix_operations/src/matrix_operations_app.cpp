@@ -82,17 +82,40 @@ bool MyApplication::validateNumberOfArguments(int argc, const char** argv) {
     return true;
 }
 
+std::string MyApplication::parseOperation(const char* arg) {
+    std::string op;
+    if (strcmp(arg, "inverse") == 0) {
+        op = "inverse";
+    } else if (strcmp(arg, "transpose") == 0) {
+        op = "transpose";
+    } else if (strcmp(arg, "determinant") == 0) {
+        op = "determinant";
+    } else if (strcmp(arg, "/") == 0) {
+        op = "/";
+    } else if (strcmp(arg, "*") == 0) {
+        op = "*";
+    } else if (strcmp(arg, "+") == 0) {
+        op = "*";
+    } else if (strcmp(arg, "-") == 0) {
+        op = "-";
+    } else {
+        throw std::string("Wrong operation format!");
+    }
+    return op;
+}
+
 std::string MyApplication::operator()(int argc, const char** argv) {
     std::string s_type;
-    const char* op;
     std::vector<std::vector<double>> arr;
     std::vector<std::vector<double>> ad_arr;
-    double num = 0;
+
     if (!validateNumberOfArguments(argc, argv)) {
         return message_;
     }
     std::ostringstream stream;
     try {
+        std::string op;
+        double num = 0;
         unsigned int or_rows = static_cast<unsigned int>(*argv[1]);
         unsigned int or_cols = static_cast<unsigned int>(*argv[2]);
         unsigned int ad_rows;
@@ -120,28 +143,28 @@ std::string MyApplication::operator()(int argc, const char** argv) {
                     k++;
                 }
             }
-            op = argv[type_ind + 3 + ad_rows * ad_cols];
+            op = parseOperation(argv[type_ind + 3 + ad_rows * ad_cols]);
         } else if (s_type == "number") {
             num = std::atof(argv[type_ind + 1]);
-            op = argv[type_ind + 2];
+            op = parseOperation(argv[type_ind + 2]);
         } else if (s_type == "none") {
-            op = argv[type_ind + 1];
+            op = parseOperation(argv[type_ind + 1]);
         }
 
-    Matrix m_1(or_rows, or_cols);
-    m_1.set_data(arr);
-    Matrix m_2(1, 1);
-    if (s_type == "matrix") {
-        Matrix tmp(ad_rows, ad_cols);
-        tmp.set_data(ad_arr);
-        m_2 = tmp;
-    }
+        Matrix m_1(or_rows, or_cols);
+        m_1.set_data(arr);
+        Matrix m_2(1, 1);
+        if (s_type == "matrix") {
+            Matrix tmp(ad_rows, ad_cols);
+            tmp.set_data(ad_arr);
+            m_2 = tmp;
+        }
 
-    Matrix res_m(1, 1);
-    double res_num;
-    unsigned int res_rows;
-    unsigned int res_cols;
-        if (strcmp(op, "+") == 0) {
+        Matrix res_m(1, 1);
+        double res_num;
+        unsigned int res_rows;
+        unsigned int res_cols;
+        if (op == "+") {
             res_m = m_1 + m_2;
             res_rows = res_m.Get_Rows();
             res_cols = res_m.Get_Cols();
@@ -152,7 +175,7 @@ std::string MyApplication::operator()(int argc, const char** argv) {
                 }
                 stream << std::endl;
             }
-        } else if (strcmp(op, "*") == 0) {
+        } else if (op == "*") {
             if (s_type == "number") {
                 res_m = m_1 * num;
             } else if (s_type == "matrix") {
@@ -166,7 +189,7 @@ std::string MyApplication::operator()(int argc, const char** argv) {
                 }
                 stream << std::endl;
             }
-        } else if (strcmp(op, "-") == 0) {
+        } else if (op == "-") {
             res_m = m_1 - m_2;
             res_rows = res_m.Get_Rows();
             res_cols = res_m.Get_Cols();
@@ -176,7 +199,7 @@ std::string MyApplication::operator()(int argc, const char** argv) {
                 }
                 stream << std::endl;
             }
-        } else if (strcmp(op, "/") == 0) {
+        } else if (op == "/") {
             res_m = m_1 / num;
             res_rows = res_m.Get_Rows();
             res_cols = res_m.Get_Cols();
@@ -186,7 +209,7 @@ std::string MyApplication::operator()(int argc, const char** argv) {
                 }
                 stream << std::endl;
             }
-        } else if (strcmp(op, "transpose") == 0) {
+        } else if (op == "transpose") {
             res_m = m_1.Get_Transpose();
             res_rows = res_m.Get_Rows();
             res_cols = res_m.Get_Cols();
@@ -197,10 +220,10 @@ std::string MyApplication::operator()(int argc, const char** argv) {
                 }
                 stream << std::endl;
             }
-        } else if (strcmp(op, "determinant") == 0) {
+        } else if (op == "determinant") {
             res_num = m_1.Determinant();
             stream << "Determinant is " << res_num << std::endl;
-        } else if (strcmp(op, "inverse") == 0) {
+        } else if (op == "inverse") {
             m_1.Inverse();
             res_rows = m_1.Get_Rows();
             res_cols = m_1.Get_Cols();
@@ -215,7 +238,6 @@ std::string MyApplication::operator()(int argc, const char** argv) {
             throw std::string("Wrong type format!");
         }
     }
-
     catch(...) {
         help(argv[0]);
         return message_ = "ERROR: Invalid argument";

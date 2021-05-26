@@ -16,7 +16,6 @@ class MyApplication {
     void help(const char* appname, const char* message = "");
     bool validateNumberOfArguments(int argc, const char** argv);
     std::string parseOperation(const char* arg);
-    std::string parseSecondType(const char* arg);
     std::string message_;
 };
 
