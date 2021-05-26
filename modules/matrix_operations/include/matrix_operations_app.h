@@ -4,7 +4,7 @@
 #define MODULES_MATRIX_OPERATIONS_INCLUDE_MATRIX_OPERATIONS_APP_H_
 
 #include <string>
-
+#include <vector>
 #include "include/matrix_operations.h"
 
 class MyApplication {

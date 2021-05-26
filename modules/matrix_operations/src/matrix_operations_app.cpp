@@ -10,6 +10,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <vector>
 
 MyApplication::MyApplication() : message_("") {}
 
