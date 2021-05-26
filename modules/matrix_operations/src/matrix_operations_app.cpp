@@ -66,17 +66,17 @@ bool MyApplication::validateNumberOfArguments(int argc, const char** argv) {
             supp_argc = first_arg_num + 1 + 2 +
             static_cast<unsigned int>(*argv[first_arg_num + 2]) *
             static_cast<unsigned int>(*argv[first_arg_num + 3]) + 1;
-            if (supp_argc != argc) {
+            if (supp_argc != argc_uns) {
                 return false;
             }
         } else if (strcmp(argv[first_arg_num], "number") == 0) {
             supp_argc = first_arg_num + 1 + 2;
-            if (supp_argc != argc) {
+            if (supp_argc != argc_uns) {
                 return false;
             }
         } else if (strcmp(argv[first_arg_num], "none") == 0) {
             supp_argc = first_arg_num + 1 + 1;
-            if (supp_argc != argc) {
+            if (supp_argc != argc_uns) {
                 return false;
             }
         }
