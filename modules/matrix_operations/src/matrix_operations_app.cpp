@@ -45,7 +45,6 @@ bool MyApplication::validateNumberOfArguments(int argc, const char** argv) {
         help(argv[0]);
         return false;
     } else {
-        std::ostringstream stream;
         int or_rows_  = std::atoi(argv[1]);
         int or_cols_  = std::atoi(argv[2]);
         unsigned int or_rows = static_cast<unsigned int>(or_rows_);
