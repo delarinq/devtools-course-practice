@@ -11,3 +11,66 @@ add_test(
 set_tests_properties (${prefix}_can_Run PROPERTIES
     LABELS "${MODULE}")
 
+add_test(
+    NAME ${prefix}_invalid_col_number
+    COMMAND ${APPLICATION} 3 0 4 none determinant
+)
+set_tests_properties (${prefix}_invalid_col_number PROPERTIES
+    PASS_REGULAR_EXPRESSION "ERROR: Invalid dimension size."
+    LABELS "${MODULE}")
+
+add_test(
+    NAME ${prefix}_invalid_row_number
+    COMMAND ${APPLICATION} 0 3 none transpose
+)
+set_tests_properties (${prefix}_invalid_row_number PROPERTIES
+    PASS_REGULAR_EXPRESSION "ERROR: Invalid dimension size."
+    LABELS "${MODULE}")
+
+add_test(
+    NAME ${prefix}_invalid_original_matrix
+    COMMAND ${APPLICATION} 2 3 1 2 3 4 5 none transpose
+)
+set_tests_properties (${prefix}_invalid_original_matrix PROPERTIES
+    PASS_REGULAR_EXPRESSION "ERROR: Invalid operation format, second type format or invalid input!"
+    LABELS "${MODULE}")
+
+add_test(
+    NAME ${prefix}_invalid_ad_matrix_row_size
+    COMMAND ${APPLICATION} 2 3 1 2 3 4 5 6 matrix 0 4 +
+)
+set_tests_properties (${prefix}_invalid_ad_matrix_row_size PROPERTIES
+    PASS_REGULAR_EXPRESSION "ERROR: Invalid dimension size of the second matrix."
+    LABELS "${MODULE}")
+
+add_test(
+    NAME ${prefix}_invalid_ad_matrix_col_size
+    COMMAND ${APPLICATION} 2 3 1 2 3 4 5 6 matrix 4 0 +
+)
+set_tests_properties (${prefix}_invalid_ad_matrix_col_size PROPERTIES
+    PASS_REGULAR_EXPRESSION "ERROR: Invalid dimension size of the second matrix."
+    LABELS "${MODULE}")
+
+add_test(
+    NAME ${prefix}_invalid_number_of_elements_for_second_matrix
+    COMMAND ${APPLICATION} 2 3 1 2 3 4 5 6 matrix 3 2 1 2 3 + 
+)
+set_tests_properties (${prefix}_invalid_number_of_elements_for_second_matrix PROPERTIES
+    PASS_REGULAR_EXPRESSION "ERROR: Invalid number of arguments for the second matrix."
+    LABELS "${MODULE}")
+
+add_test(
+    NAME ${prefix}_operation_nuance_1
+    COMMAND ${APPLICATION} 2 3 1 2 3 4 5 6 matrix 3 2 1 2 3 4 5 6 +
+)
+set_tests_properties (${prefix}_operation_nuance_1 PROPERTIES
+    PASS_REGULAR_EXPRESSION "ERROR: Invalid matrix sizes for the current operation."
+    LABELS "${MODULE}")
+
+add_test(
+    NAME ${prefix}_invalid_op
+    COMMAND ${APPLICATION} 2 3 1 2 3 4 5 6 matrix 3 2 1 2 3 4 5 6 delete
+)
+set_tests_properties (${prefix}_invalid_op PROPERTIES
+    PASS_REGULAR_EXPRESSION "ERROR: Invalid operation format, second type format or invalid input!"
+    LABELS "${MODULE}")
