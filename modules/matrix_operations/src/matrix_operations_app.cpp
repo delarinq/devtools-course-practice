@@ -6,7 +6,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
-
+#include <cstring>
 MyApplication::MyApplication() : message_("") {}
 
 void MyApplication::help(const char* appname, const char* message) {
@@ -111,9 +111,8 @@ std::string MyApplication::parseOperation(const char* arg) {
         return ("+");
     } else if (strcmp(arg, "-") == 0) {
         return ("-");
-    } else {
-        return message_ = "error";
     }
+    return message_ = "error";
 }
 
 std::string MyApplication::parseSecondType(const char* arg) {
@@ -123,10 +122,9 @@ std::string MyApplication::parseSecondType(const char* arg) {
         return ("none");
     } else if (strcmp(arg, "number") == 0) {
         return ("number");
-    } else {
-        return message_ =
-        "ERROR: Invalid operation format, second type format or invalid input!";
     }
+    return message_ =
+    "ERROR: Invalid operation format, second type format or invalid input!";
 }
 std::string MyApplication::operator()(int argc, const char** argv) {
     std::string s_type;
