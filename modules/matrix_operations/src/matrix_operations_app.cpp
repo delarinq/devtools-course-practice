@@ -41,39 +41,34 @@ bool MyApplication::validateNumberOfArguments(int argc, const char** argv) {
         return false;
     } else {
         int or_rows_, or_cols_;
-        try {
-            or_rows_  = std::stoi(argv[1]);
-            or_cols_  = std::stoi(argv[2]);
-            int check = or_rows_ * or_cols_;
-            if (check + 3 > argc) {
-                help(argv[0],
-                "ERROR: Invalid input of the original matrix.\n\n");
-                return false;
-            }
-        }
-        catch(...) {
-            help(argv[0], "ERROR: Invalid input of the original matrix.\n\n");
+        or_rows_  = std::atoi(argv[1]);
+        or_cols_  = std::atoi(argv[2]);
+        int check = or_rows_ * or_cols_;
+        if (check + 3 > argc) {
+            help(argv[0],
+            "ERROR: Invalid input of the original matrix.\n\n");
             return false;
         }
         unsigned int or_rows = static_cast<unsigned int>(or_rows_);
         unsigned int or_cols = static_cast<unsigned int>(or_cols_);
-        unsigned int first_arg_num = or_rows * or_cols + 3;
-        unsigned int supp_argc = 0;
-        unsigned int argc_uns = static_cast<unsigned int>(argc);
         if ((or_rows == 0) || (or_cols == 0)) {
             help(argv[0], "ERROR: Invalid dimension size.\n\n");
             return false;
-        } else if (strcmp(argv[first_arg_num], "matrix") == 0) {
+        }
+        unsigned int first_arg_num = or_rows * or_cols + 3;
+        unsigned int supp_argc = 0;
+        unsigned int argc_uns = static_cast<unsigned int>(argc);
+        if (strcmp(argv[first_arg_num], "matrix") == 0) {
             int ad_rows_  = std::atoi(argv[first_arg_num + 1]);
             int ad_cols_  = std::atoi(argv[first_arg_num + 2]);
             unsigned int ad_rows = static_cast<unsigned int>(ad_rows_);
             unsigned int ad_cols = static_cast<unsigned int>(ad_cols_);
-            supp_argc = first_arg_num + 1 + 2 + ad_rows * ad_cols + 1;
             if ((ad_rows == 0) || (ad_cols == 0)) {
                 help(argv[0],
-                "ERROR: Invalid dimension size of the second matrix.\n\n");
+                "ERROR: Invalid dimension size of second matrix.\n\n");
                 return false;
             }
+            supp_argc = first_arg_num + 1 + 2 + ad_rows * ad_cols + 1;
             if (supp_argc != argc_uns) {
                 help(argv[0],
                 "ERROR: Invalid number of arguments for second matrix.\n\n");
@@ -124,7 +119,7 @@ std::string MyApplication::parseSecondType(const char* arg) {
         return ("number");
     }
     return message_ =
-    "ERROR: Invalid operation format, second type format or invalid input!";
+    "ERROR: Invalid type of second argument.";
 }
 std::string MyApplication::operator()(int argc, const char** argv) {
     std::string s_type;
@@ -164,16 +159,9 @@ std::string MyApplication::operator()(int argc, const char** argv) {
     int type_ind = or_rows * or_cols + 3;
     s_type = parseSecondType(argv[type_ind]);
     if (s_type == "matrix") {
-    int ad_rows_, ad_cols_;
-    try {
-        ad_rows_  = std::stoi(argv[type_ind + 1]);
-        ad_cols_  = std::stoi(argv[type_ind + 2]);
-        }
-        catch(...) {
-            help(argv[0]);
-            return message_ = "ERROR: Invalid sizes of second matrix.";
-        }
-
+        int ad_rows_, ad_cols_;
+        ad_rows_  = std::atoi(argv[type_ind + 1]);
+        ad_cols_  = std::atoi(argv[type_ind + 2]);
         ad_rows = static_cast<unsigned int>(ad_rows_);
         ad_cols = static_cast<unsigned int>(ad_cols_);
         ad_arr.resize(ad_rows);
@@ -194,6 +182,10 @@ std::string MyApplication::operator()(int argc, const char** argv) {
             return message_ = "ERROR: Invalid elements of second matrix.";
         }
         op = parseOperation(argv[type_ind + 3 + ad_rows * ad_cols]);
+        if (op == "error") {
+            return message_ =
+            "ERROR: Invalid operation";
+        }
         if ((op != "+") && (op != "*") && (op != "-")) {
             return message_ =
             "ERROR: Wrong second type or wrong operation.";
@@ -207,17 +199,25 @@ std::string MyApplication::operator()(int argc, const char** argv) {
             return message_ = "ERROR: Invalid number.";
         }
         op = parseOperation(argv[type_ind + 2]);
+        if (op == "error") {
+            return message_ =
+            "ERROR: Invalid operation";
+        }
         if ((op != "*") && (op != "/")) {
             return message_ =
             "ERROR: Wrong second type or wrong operation.";
         }
     } else if (s_type == "none") {
         op = parseOperation(argv[type_ind + 1]);
+        if (op == "error") {
+            return message_ =
+            "ERROR: Invalid operation";
+        }
         if ((op != "transpose") &&
             (op != "inverse") &&
             (op != "determinant")) {
                 return message_ =
-                "ERROR: This operation requires more arguments.";
+                "ERROR: Wrong second type or wrong operation.";
             }
     } else { return s_type; }
 
@@ -332,6 +332,10 @@ std::string MyApplication::operator()(int argc, const char** argv) {
             stream << std::endl;
         }
     } else if (op == "determinant") {
+        if (or_rows != or_cols) {
+            return message_ =
+            "ERROR: The matrix must be square.";
+        }
         res_num = m_1.Determinant();
         stream << "Determinant is " << res_num << std::endl;
     } else if (op == "inverse") {
@@ -355,8 +359,6 @@ std::string MyApplication::operator()(int argc, const char** argv) {
             }
             stream << std::endl;
         }
-    } else {
-        return op;
     }
 
     message_ = stream.str();
