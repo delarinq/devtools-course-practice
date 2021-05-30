@@ -40,10 +40,10 @@ bool MyApplication::validateNumberOfArguments(int argc, const char** argv) {
         help(argv[0]);
         return false;
     } else {
+        int or_rows_, or_cols_;
         try {
-            int a;
-            int or_rows_  = std::stoi(argv[1]);
-            int or_cols_  = std::stoi(argv[2]);
+            or_rows_  = std::stoi(argv[1]);
+            or_cols_  = std::stoi(argv[2]);
             int check = or_rows_ * or_cols_;
             if (check + 3 > argc) {
                 help(argv[0],
@@ -51,7 +51,7 @@ bool MyApplication::validateNumberOfArguments(int argc, const char** argv) {
                 return false;
             }
             for (int i = 3; i < check; i++) {
-                a = std::stoi(argv[i]);
+                int a = std::stoi(argv[i]);
             }
         }
         catch(...) {
@@ -59,8 +59,8 @@ bool MyApplication::validateNumberOfArguments(int argc, const char** argv) {
             return false;
         }
 
-        int or_rows_  = std::atoi(argv[1]);
-        int or_cols_  = std::atoi(argv[2]);
+        // int or_rows_  = std::atoi(argv[1]);
+        // int or_cols_  = std::atoi(argv[2]);
         unsigned int or_rows = static_cast<unsigned int>(or_rows_);
         unsigned int or_cols = static_cast<unsigned int>(or_cols_);
         unsigned int first_arg_num = or_rows * or_cols + 3;
@@ -172,17 +172,18 @@ std::string MyApplication::operator()(int argc, const char** argv) {
         }
         int type_ind = or_rows * or_cols + 3;
         s_type = parseSecondType(argv[type_ind]);
+        int ad_rows_, ad_cols_;
         if (s_type == "matrix") {
             try {
-                int ad_rows_  = std::stoi(argv[type_ind + 1]);
-                int ad_cols_  = std::stoi(argv[type_ind + 2]);
+                ad_rows_  = std::stoi(argv[type_ind + 1]);
+                ad_cols_  = std::stoi(argv[type_ind + 2]);
             }
             catch(...) {
                 help(argv[0]);
                 return message_ = "ERROR: Invalid sizes of second matrix.";
             }
-            int ad_rows_  = std::stoi(argv[type_ind + 1]);
-            int ad_cols_  = std::stoi(argv[type_ind + 2]);
+            // int ad_rows_  = std::stoi(argv[type_ind + 1]);
+            // int ad_cols_  = std::stoi(argv[type_ind + 2]);
             ad_rows = static_cast<unsigned int>(ad_rows_);
             ad_cols = static_cast<unsigned int>(ad_cols_);
             ad_arr.resize(ad_rows);

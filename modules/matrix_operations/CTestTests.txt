@@ -56,7 +56,7 @@ add_test(
     COMMAND ${APPLICATION} 2 3 1 2 3 4 5 6 matrix 3 2 1 2 3 + 
 )
 set_tests_properties (${prefix}_invalid_number_of_elements_for_second_matrix PROPERTIES
-    PASS_REGULAR_EXPRESSION "ERROR: Invalid number of arguments for the second matrix."
+    PASS_REGULAR_EXPRESSION "ERROR: Invalid number of arguments for second matrix."
     LABELS "${MODULE}")
 
 add_test(
