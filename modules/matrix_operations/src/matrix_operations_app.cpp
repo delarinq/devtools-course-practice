@@ -7,6 +7,8 @@
 #include <sstream>
 #include <vector>
 #include <cstring>
+#include <algorithm>
+
 MyApplication::MyApplication() : message_("") {}
 
 void MyApplication::help(const char* appname, const char* message) {
@@ -92,22 +94,14 @@ bool MyApplication::validateNumberOfArguments(int argc, const char** argv) {
 }
 
 std::string MyApplication::parseOperation(const char* arg) {
-    if (strcmp(arg, "inverse") == 0) {
-        return ("inverse");
-    } else if (strcmp(arg, "transpose") == 0) {
-        return ("transpose");
-    } else if (strcmp(arg, "determinant") == 0) {
-        return ("determinant");
-    } else if (strcmp(arg, "/") == 0) {
-        return ("/");
-    } else if (strcmp(arg, "*") == 0) {
-        return ("*");
-    } else if (strcmp(arg, "+") == 0) {
-        return ("+");
-    } else if (strcmp(arg, "-") == 0) {
-        return ("-");
+    std::vector<std::string> ops =
+    { "inverse", "transpose", "determinant", "/", "*", "+", "-" };
+    auto result = std::find(std::begin(ops), std::end(ops), std::string(arg));
+    if (result != std::end(ops)) {
+        return std::string(arg);
+    } else {
+        return message_ = "error";
     }
-    return message_ = "error";
 }
 
 std::string MyApplication::parseSecondType(const char* arg) {
@@ -130,7 +124,6 @@ std::string MyApplication::operator()(int argc, const char** argv) {
         return message_;
     }
     std::ostringstream stream;
-    std::string op;
     double num = 0;
     int or_rows_  = std::atoi(argv[1]);
     int or_cols_  = std::atoi(argv[2]);
@@ -158,6 +151,7 @@ std::string MyApplication::operator()(int argc, const char** argv) {
     }
     int type_ind = or_rows * or_cols + 3;
     s_type = parseSecondType(argv[type_ind]);
+    std::string op;
     if (s_type == "matrix") {
         int ad_rows_, ad_cols_;
         ad_rows_  = std::atoi(argv[type_ind + 1]);
@@ -314,7 +308,7 @@ std::string MyApplication::operator()(int argc, const char** argv) {
             }
             stream << std::endl;
         }
-    } else if (op == "transpose") {
+    } else if (op =="transpose") {
         res_m = m_1.Get_Transpose();
         res_rows = res_m.Get_Rows();
         res_cols = res_m.Get_Cols();
